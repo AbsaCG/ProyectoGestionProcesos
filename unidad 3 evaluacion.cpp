@@ -17,7 +17,7 @@ struct Proceso {
         siguiente = NULL;
     }
 };
-
+//hola
 // ===================== LISTA ENLAZADA (Gestor de Procesos) ===================== //
 Proceso* listaProcesos = NULL;
 
@@ -102,7 +102,7 @@ void encolarProceso(Proceso* proc) {
         proc->siguiente = temp->siguiente;
         temp->siguiente = proc;
     }
-    cout << "Proceso encolado para ejecución." << endl;
+    cout << "Proceso encolado para ejecuciÃ³n." << endl;
 }
 
 void ejecutarProceso() {
@@ -161,14 +161,14 @@ void verMemoria() {
     }
 }
 
-// ===================== MENÚ PRINCIPAL ===================== //
+// ===================== MENÃš PRINCIPAL ===================== //
 int main() {
     int opcion;
     do {
-        cout << "\n--- Menú Sistema de Gestión de Procesos ---\n";
+        cout << "\n--- MenÃº Sistema de GestiÃ³n de Procesos ---\n";
         cout << "1. Insertar Proceso\n2. Eliminar Proceso\n3. Buscar Proceso\n4. Modificar Prioridad\n5. Mostrar Procesos\n";
         cout << "6. Encolar Proceso CPU\n7. Ejecutar Proceso CPU\n8. Mostrar Cola CPU\n";
-        cout << "9. Asignar Memoria\n10. Liberar Memoria\n11. Ver Memoria\n0. Salir\nOpción: ";
+        cout << "9. Asignar Memoria\n10. Liberar Memoria\n11. Ver Memoria\n0. Salir\nOpciÃ³n: ";
         cin >> opcion;
 
         int id, prio, bloque;
@@ -220,7 +220,7 @@ int main() {
             case 0:
                 cout << "Fin del programa.\n"; break;
             default:
-                cout << "Opción inválida.\n";
+                cout << "OpciÃ³n invÃ¡lida.\n";
         }
     } while (opcion != 0);
 
