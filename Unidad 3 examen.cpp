@@ -137,3 +137,38 @@ void mostrarCola() {
 
     cout << "Total de procesos en cola: " << contador << endl;
 }
+//  PILA (Gestor de Memoria)  
+struct NodoMemoria {
+    int bloque;
+    NodoMemoria* sig;// Puntero al siguiente nodo (bloque) en la pila
+    NodoMemoria(int b) { bloque = b; sig = NULL; }
+};
+
+NodoMemoria* memoria = NULL;// Apunta al ultimo bloque de memoria asignado (pila). Si es NULL, no hay bloques.
+// Asigna un bloque de memoria 
+void asignarMemoria(int bloque) {
+    NodoMemoria* nuevo = new NodoMemoria(bloque);// Crear nuevo nodo
+    nuevo->sig = memoria;// Nuevo nodo apunta al tope actual
+    memoria = nuevo; // El tope ahora es el nuevo nodo
+    cout << "Memoria asignada: bloque " << bloque << endl;
+}
+// Libera el ultimo bloque asignado 
+void liberarMemoria() {
+    if (!memoria) {
+        cout << "No hay memoria asignada.\n";
+        return;
+    }
+    NodoMemoria* temp = memoria;// Guardamos el tope actual
+    memoria = memoria->sig;// El tope pasa al siguiente nodo
+    cout << "Memoria liberada: bloque " << temp->bloque << endl;
+    delete temp;// Liberamos memoria del nodo eliminado
+}
+// Muestra todos los bloques de memoria 
+void verMemoria() {
+    NodoMemoria* temp = memoria;
+    cout << "Bloques de memoria asignados:\n";
+    while (temp) {
+        cout << "Bloque " << temp->bloque << endl;
+        temp = temp->sig;
+    }
+}
