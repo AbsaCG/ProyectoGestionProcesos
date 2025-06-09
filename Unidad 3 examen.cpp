@@ -89,3 +89,51 @@ void mostrarProcesos() {
         temp = temp->siguiente;
     }
 }
+// COLA DE PRIORIDAD (Planificador de CPU) 
+Proceso* colaCPU = NULL;
+// Encola un proceso en la cola de CPU segun su prioridad
+void encolarProceso(Proceso* proc) {
+    if (!colaCPU || proc->prioridad > colaCPU->prioridad) {
+        proc->siguiente = colaCPU;// El nuevo proceso apunta al inicio actual
+        colaCPU = proc;// Y ahora es el inicio de la cola
+    } else {
+    	 // Recorremos para encontrar la posición correcta (orden descendente)
+        Proceso* temp = colaCPU;
+        while (temp->siguiente && temp->siguiente->prioridad >= proc->prioridad)
+            temp = temp->siguiente;
+        proc->siguiente = temp->siguiente;
+        temp->siguiente = proc;
+    }
+    cout << "Proceso encolado para ejecucion." << endl;
+}
+// Ejecuta (elimina) el primer proceso en la cola de CPU
+void ejecutarProceso() {
+    if (!colaCPU) {
+        cout << "No hay procesos en cola." << endl;
+        return;
+    }
+    Proceso* proc = colaCPU;// Tomamos el primer proceso
+    colaCPU = colaCPU->siguiente;// La cola avanza al siguiente proceso
+    cout << "Ejecutando: " << proc->nombre << " (Prioridad " << proc->prioridad << ")\n";
+    delete proc;// Liberamos memoria del proceso ejecutado
+}
+// Muestra los procesos en la cola de CPU
+void mostrarCola() {
+    Proceso* temp = colaCPU;
+    int contador = 0;
+
+    cout << "\n--- Cola de CPU ---\n";
+
+    if (!temp) {
+        cout << "La cola esta vacia.\n";
+        return;
+    }
+
+    while (temp) {
+        cout << "- " << temp->nombre << " (Prioridad " << temp->prioridad << ")\n";
+        temp = temp->siguiente;
+        contador++;
+    }
+
+    cout << "Total de procesos en cola: " << contador << endl;
+}
