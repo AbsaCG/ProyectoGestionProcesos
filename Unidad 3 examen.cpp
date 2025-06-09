@@ -172,3 +172,79 @@ void verMemoria() {
         temp = temp->sig;
     }
 }
+//  MENU PRINCIPAL 
+int main() {
+    int opcion;
+    do {
+       cout << "\n--- Menu Sistema de Gestion de Procesos ---\n";
+	   cout << "1. Insertar Proceso\n";
+	   cout << "2. Eliminar Proceso\n";
+	   cout << "3. Buscar Proceso\n";
+	   cout << "4. Modificar Prioridad\n";
+	   cout << "5. Mostrar Procesos\n";
+	   cout << "6. Encolar Proceso CPU\n";
+	   cout << "7. Ejecutar Proceso CPU\n";
+	   cout << "8. Mostrar Cola CPU\n";
+	   cout << "9. Asignar Memoria\n";
+	   cout << "10. Liberar Memoria\n";
+	   cout << "11. Ver Memoria\n";
+	   cout << "0. Salir\n";
+	   cout << "Opcion: ";
+	   cin >> opcion;
+
+
+        int id, prio, bloque;
+        string nombre;
+
+        switch (opcion) {
+            case 1:
+                cout << "ID: "; cin >> id;
+                cout << "Nombre: "; cin >> nombre;
+                cout << "Prioridad: "; cin >> prio;
+                insertarProceso(id, nombre, prio);
+                break;
+            case 2:
+                cout << "ID a eliminar: "; cin >> id;
+                eliminarProceso(id);
+                break;
+            case 3:
+                cout << "ID a buscar: "; cin >> id;
+                buscarProceso(id);
+                break;
+            case 4:
+                cout << "ID a modificar: "; cin >> id;
+                cout << "Nueva prioridad: "; cin >> prio;
+                modificarPrioridad(id, prio);
+                break;
+            case 5:
+                mostrarProcesos(); break;
+            case 6:
+                cout << "ID del proceso a encolar: "; cin >> id;
+                // Copia temporal para encolar
+                {
+                    Proceso* temp = listaProcesos;
+                    while (temp && temp->id != id) temp = temp->siguiente;
+                    if (temp) encolarProceso(new Proceso(temp->id, temp->nombre, temp->prioridad));
+                    else cout << "Proceso no encontrado en lista." << endl;
+                }
+                break;
+            case 7:
+                ejecutarProceso(); break;
+            case 8:
+                mostrarCola(); break;
+            case 9:
+                cout << "Bloque a asignar: "; cin >> bloque;
+                asignarMemoria(bloque); break;
+            case 10:
+                liberarMemoria(); break;
+            case 11:
+                verMemoria(); break;
+            case 0:
+                cout << "Fin del programa.\n"; break;
+            default:
+                cout << "Opcion invalida.\n";
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
