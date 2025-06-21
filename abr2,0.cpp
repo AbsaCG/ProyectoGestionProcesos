@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-// Estructura que representa a una persona en el árbol genealógico
+// Estructura que representa a una persona en el Ã¡rbol genealÃ³gico
 struct Nodo {
     int id;             // Identificador unico de la persona
     string nombre;      // Nombre de la persona
@@ -25,7 +25,7 @@ Nodo* crearNodo(int id, string nombre) {
 // Buscar una persona en el arbol por su ID
 Nodo* buscarPorID(Nodo* raiz, int id) {
     if (raiz == NULL) return NULL;  // Si el arbol esta vacio, no hay nada que buscar
-    if (raiz->id == id) return raiz;  // Si se encontró el ID, se devuelve el nodo
+    if (raiz->id == id) return raiz;  // Si se encontrÃ³ el ID, se devuelve el nodo
 
     // Buscar en el hijo izquierdo
     Nodo* encontrado = buscarPorID(raiz->izq, id);
@@ -35,7 +35,7 @@ Nodo* buscarPorID(Nodo* raiz, int id) {
     return buscarPorID(raiz->der, id);
 }
 
-// Función para insertar un nuevo hijo a un padre ya registrado
+// FunciÃ³n para insertar un nuevo hijo a un padre ya registrado
 void insertarHijo(Nodo* padre, int id, string nombre) {
     Nodo* hijo = crearNodo(id, nombre);  // Crear nuevo hijo
     hijo->padre = padre;                 // Se le asigna su padre
@@ -63,7 +63,7 @@ void mostrarArbol(Nodo* raiz, int espacio = 0, int separacion = 5) {
     for (int i = separacion; i < espacio; i++) cout << " ";
     cout << "(" << raiz->id << ") " << raiz->nombre << "\n";
 
-    // Luego mostrar el subárbol izquierdo
+    // Luego mostrar el subÃ¡rbol izquierdo
     mostrarArbol(raiz->izq, espacio);
 }
 
@@ -128,7 +128,7 @@ void mostrarRelacion(Nodo* persona) {
     if (persona->padre != NULL)
         cout << "Padre: " << persona->padre->nombre << " (ID: " << persona->padre->id << ")\n";
     else
-        cout << "No tiene padre registrado (es raíz).\n";
+        cout << "No tiene padre registrado (es raÃ­z).\n";
 
     // Mostrar sus hijos si tiene
     if (persona->izq != NULL)
@@ -262,7 +262,7 @@ int main() {
                 cout << "Opcion invalida.\n";
         }
 
-    } while (opcion != 10);  // El menú se repite hasta que el usuario elija salir
+    } while (opcion != 10);  // El menÃº se repite hasta que el usuario elija salir
 
     return 0;
 }
