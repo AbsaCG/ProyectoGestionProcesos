@@ -67,6 +67,56 @@ void mostrarArbol(Nodo* raiz, int espacio = 0, int separacion = 5) {
     mostrarArbol(raiz->izq, espacio);
 }
 
+// Recorrido PREORDEN: primero el nodo, luego los hijos
+void preorden(Nodo* raiz) {
+    if (raiz == NULL) return;
+    cout << "(" << raiz->id << ") " << raiz->nombre << "  "; // Visita nodo
+    preorden(raiz->izq); // Izquierda
+    preorden(raiz->der); // Derecha
+}
+
+// Recorrido INORDEN: primero hijo izq, luego nodo, luego hijo der
+void inorden(Nodo* raiz) {
+    if (raiz == NULL) return;
+    inorden(raiz->izq); // Izquierda
+    cout << "(" << raiz->id << ") " << raiz->nombre << "  "; // Nodo
+    inorden(raiz->der); // Derecha
+}
+
+// Recorrido POSTORDEN: primero hijos, luego el nodo
+void postorden(Nodo* raiz) {
+    if (raiz == NULL) return;
+    postorden(raiz->izq); // Izquierda
+    postorden(raiz->der); // Derecha
+    cout << "(" << raiz->id << ") " << raiz->nombre << "  "; // Nodo
+}
+
+// Mostrar ancestros desde una persona hacia la raiz
+void mostrarAncestros(Nodo* persona) {
+    if (persona == NULL) return;
+    Nodo* actual = persona->padre;   // Comenzamos desde su padre
+    while (actual != NULL) {
+        cout << " <- (" << actual->id << ") " << actual->nombre;
+        actual = actual->padre;      // Subimos un nivel (al padre del padre)
+    }
+    cout << "\n";
+}
+
+// Mostrar descendientes de una persona (hijos, nietos, etc.)
+void mostrarDescendientes(Nodo* persona) {
+    if (persona == NULL) return;
+
+    if (persona->izq != NULL) {
+        cout << "Hijo: (" << persona->izq->id << ") " << persona->izq->nombre << "\n";
+        mostrarDescendientes(persona->izq); // Mostrar descendientes del hijo izquierdo
+    }
+
+    if (persona->der != NULL) {
+        cout << "Hijo: (" << persona->der->id << ") " << persona->der->nombre << "\n";
+        mostrarDescendientes(persona->der); // Mostrar descendientes del hijo derecho
+    }
+}
+
 // Mostrar relaciones familiares directas
 void mostrarRelacion(Nodo* persona) {
     if (persona == NULL) return;
